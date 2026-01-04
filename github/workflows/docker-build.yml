@@ -1,0 +1,14 @@
+name: Build Docker Image
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3  # Это готовый скрипт от GitHub, клонирует твой репо
+      
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag my-site:$(date +%s)
