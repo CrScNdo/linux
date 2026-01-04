@@ -3,60 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Future Vision | Обновленный Дизайн</title>
+    <title>CrScNdo | Digital Universe</title>
     <style>
-        /* --- ШРИФТЫ И БАЗА --- */
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;800&display=swap');
 
         :root {
-            --bg-color: #0f172a;
-            --primary: #818cf8; /* Светлее для контраста */
-            --accent: #f472b6;  /* Розовый посветлее */
-            --text-color: #ffffff;
-            --text-muted: #cbd5e1;
+            --bg-dark: #050505;
+            --bg-panel: rgba(255, 255, 255, 0.03);
+            --primary: #a855f7; /* Фиолетовый */
+            --accent: #06b6d4;  /* Циан */
+            --text-main: #ffffff;
+            --text-muted: #9ca3af;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            background-color: var(--bg-dark);
+            color: var(--text-main);
             overflow-x: hidden;
-            line-height: 1.6;
+            min-height: 100vh;
         }
 
-        /* --- ФОН (Сделали спокойнее) --- */
-        .background-blobs {
+        /* --- ФОН --- */
+        .fog {
             position: fixed;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(168, 85, 247, 0.15), transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.15), transparent 40%);
             z-index: -1;
-            overflow: hidden;
-            background: #0f172a;
-        }
-
-        .blob {
-            position: absolute;
-            filter: blur(90px);
-            opacity: 0.4; /* Уменьшили непрозрачность, чтобы не мешало тексту */
-            animation: float 10s infinite alternate;
-            border-radius: 50%;
-        }
-
-        .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: #4f46e5; }
-        .blob-2 { bottom: -10%; right: -10%; width: 50vw; height: 50vw; background: #db2777; }
-
-        @keyframes float {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(20px, 40px); }
+            filter: blur(60px);
         }
 
         /* --- НАВИГАЦИЯ --- */
@@ -68,107 +47,234 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            backdrop-filter: blur(10px);
-            background: rgba(15, 23, 42, 0.5);
-            z-index: 1000;
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(15px);
+            z-index: 100;
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
-        .logo {
-            font-size: 1.4rem;
-            font-weight: 800;
-            letter-spacing: 1px;
-            color: white;
+        .logo { font-weight: 800; font-size: 1.5rem; letter-spacing: 2px; }
+        
+        .menu { display: flex; gap: 30px; }
+        .menu button {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: inherit;
         }
+        .menu button:hover, .menu button.active { color: var(--text-main); text-shadow: 0 0 10px var(--primary); }
 
-        /* --- ГЛАВНЫЙ ЭКРАН (Выравнивание исправлено) --- */
-        header {
-            height: 100vh;
+        /* --- КОНТЕЙНЕР СТРАНИЦ --- */
+        main {
+            padding-top: 100px;
+            min-height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            text-align: center;
-            padding: 0 20px;
+            padding-bottom: 50px;
         }
 
-        .hero-content {
-            max-width: 800px; /* Ограничиваем ширину, чтобы текст не разлетался */
-            margin: 0 auto;
+        .page {
+            display: none; /* Скрываем все страницы по умолчанию */
+            width: 100%;
+            max-width: 1000px;
+            padding: 20px;
+            animation: fadeIn 0.8s ease;
         }
 
-        h1 {
-            font-size: 4rem; /* Чуть меньше для аккуратности */
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 25px;
-            /* Убрали грязную тень, добавили легкое свечение */
-            text-shadow: 0 0 40px rgba(129, 140, 248, 0.3); 
+        .page.active { display: block; } /* Показываем активную */
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        h1 span {
-            /* Градиент теперь ярче */
-            background: linear-gradient(135deg, #a5b4fc, #f9a8d4);
+        /* --- СТРАНИЦА: ГЛАВНАЯ --- */
+        .hero h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #fff, #94a3b8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-
-        p.subtitle {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            margin-bottom: 40px;
-            font-weight: 400;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .btn {
-            padding: 18px 45px;
-            font-size: 1rem;
-            font-weight: 600;
-            color: white;
-            background: white;
-            color: var(--bg-color);
-            border: none;
-            border-radius: 50px;
+        .hero p { color: var(--text-muted); font-size: 1.2rem; max-width: 600px; margin-bottom: 30px; }
+        
+        .btn-glitch {
+            padding: 15px 40px;
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            font-weight: bold;
             cursor: pointer;
             transition: 0.3s;
-            text-decoration: none;
-            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-glitch:hover { background: var(--primary); color: #fff; box-shadow: 0 0 20px var(--primary); }
+
+        /* --- СТРАНИЦА: СОЗДАТЕЛЬ (CrScNdo) --- */
+        .profile-card {
+            background: var(--bg-panel);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 50px;
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
         }
 
-        .btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+        .avatar-container {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 30px;
+            position: relative;
         }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid rgba(255,255,255,0.1);
+            filter: grayscale(20%);
+            transition: 0.5s;
+        }
+
+        .avatar-container:hover .avatar {
+            filter: grayscale(0%);
+            box-shadow: 0 0 30px var(--primary);
+            transform: scale(1.05);
+        }
+
+        .nickname {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .role {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 20px;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .bio {
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        /* --- СТРАНИЦА: ПРОЕКТЫ --- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .project-card {
+            background: var(--bg-panel);
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.3s;
+        }
+        .project-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+        .project-card h3 { margin-bottom: 10px; }
+        .project-card p { color: var(--text-muted); font-size: 0.9rem; }
 
         /* --- АДАПТИВНОСТЬ --- */
         @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            .blob { opacity: 0.3; }
-            nav { padding: 15px; }
+            .hero h1 { font-size: 2.5rem; }
+            nav { padding: 15px 20px; }
+            .menu { gap: 15px; }
+            .profile-card { padding: 30px 20px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="background-blobs">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-    </div>
+    <div class="fog"></div>
 
     <nav>
-        <div class="logo">FUTURE.</div>
+        <div class="logo">CrScNdo.</div>
+        <div class="menu">
+            <button onclick="showPage('home')" class="active" id="btn-home">Главная</button>
+            <button onclick="showPage('creator')" id="btn-creator">Создатель</button>
+            <button onclick="showPage('projects')" id="btn-projects">Проекты</button>
+        </div>
     </nav>
 
-    <header>
-        <div class="hero-content">
-            <h1>Создаем <span>Цифровое</span> Будущее</h1>
-            <p class="subtitle">Идеальный баланс эстетики и технологий. Мы делаем веб-сайты, которые работают на ваш бизнес.</p>
-            <a href="#" class="btn">Начать проект</a>
-        </div>
-    </header>
+    <main>
+        <!-- СТРАНИЦА: ГЛАВНАЯ -->
+        <section id="home" class="page active">
+            <div class="hero">
+                <h1>Добро пожаловать<br>в цифровую бездну</h1>
+                <p>Место, где идеи обретают форму, а код становится искусством. Мы создаем будущее, которого вы ждали.</p>
+                <button onclick="showPage('creator')" class="btn-glitch">УЗНАТЬ КТО МЫ</button>
+            </div>
+        </section>
 
+        <!-- СТРАНИЦА: СОЗДАТЕЛЬ -->
+        <section id="creator" class="page">
+            <div class="profile-card">
+                <div class="avatar-container">
+                    <!-- Здесь подгружается ваша картинка -->
+                    <img src="avatar.jpg" alt="CrScNdo Avatar" class="avatar">
+                </div>
+                <h2 class="nickname">CrScNdo</h2>
+                <p class="role">ARCHITECT / DEVELOPER</p>
+                <p class="bio">
+                    "Я не просто пишу код, я создаю миры. Стремление к идеальному балансу между хаосом и порядком. Добро пожаловать в моё видение."
+                </p>
+                <div style="display: flex; justify-content: center; gap: 20px;">
+                    <button class="btn-glitch" style="padding: 10px 20px; font-size: 0.8rem;">GITHUB</button>
+                    <button class="btn-glitch" style="padding: 10px 20px; font-size: 0.8rem;">TELEGRAM</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- СТРАНИЦА: ПРОЕКТЫ -->
+        <section id="projects" class="page">
+            <h2 style="margin-bottom: 30px; text-align: center;">Мои Разработки</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>Project Void</h3>
+                    <p>Система управления данными нового поколения с использованием нейросетей.</p>
+                </div>
+                <div class="project-card">
+                    <h3>Neon UI</h3>
+                    <p>Библиотека компонентов для создания футуристичных интерфейсов.</p>
+                </div>
+                <div class="project-card">
+                    <h3>Shadow Protocol</h3>
+                    <p>Защищенный мессенджер с сквозным шифрованием.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function showPage(pageId) {
+            // Скрыть все страницы
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            // Убрать подсветку кнопок
+            document.querySelectorAll('.menu button').forEach(btn => btn.classList.remove('active'));
+            
+            // Показать нужную страницу
+            document.getElementById(pageId).classList.add('active');
+            // Подсветить нужную кнопку
+            document.getElementById('btn-' + pageId).classList.add('active');
+        }
+    </script>
 </body>
 </html>
