@@ -5,6 +5,8 @@ services:
     ports:
       - "8080:80"
     container_name: production-site
+    volumes:
+      - ./index.html:/usr/share/nginx/html/index.html
 
   updater:
     image: containrrr/watchtower
