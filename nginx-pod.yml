@@ -25,7 +25,7 @@ spec:
         - name: html-volume
           mountPath: /usr/share/nginx/html/creators.html
           subPath: creators.html
-        
+
         # --- КАРТИНКИ ---
         - name: img-volume
           mountPath: /usr/share/nginx/html/screen.jpg
@@ -39,7 +39,7 @@ spec:
         - name: img-volume
           mountPath: /usr/share/nginx/html/avatar2.jpg
           subPath: avatar2.jpg
-        
+
         # --- ФАВИКОНКА (НОВОЕ) ---
         - name: img-volume
           mountPath: /usr/share/nginx/html/vinyl.jpg
