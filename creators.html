@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Создатели | Future Vision</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #050505;
+            --card-bg: #0f0f0f;
+            --accent: #00ffd5;
+            --purple: #7b4fff;
+        }
+        body {
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-color);
+            color: #fff;
+            min-height: 100vh;
+        }
+        /* Меню (копия с главной) */
+        header { padding: 30px 50px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-weight: 900; font-size: 20px; text-transform: uppercase; color: #fff; text-decoration: none;}
+        .logo span { color: var(--accent); }
+        nav a { text-decoration: none; color: #b0b0b0; font-size: 12px; font-weight: 600; text-transform: uppercase; margin-left: 30px; transition: 0.3s; }
+        nav a:hover { color: var(--accent); }
+
+        /* Контент */
+        .container {
+            max-width: 1200px; margin: 0 auto; padding: 60px 20px;
+            display: flex; flex-direction: column; align-items: center;
+        }
+
+        /* Организация */
+        .org-section { text-align: center; margin-bottom: 80px; animation: fadeIn 1s ease; }
+        .org-img {
+            width: 150px; height: 150px; border-radius: 50%; object-fit: cover;
+            border: 3px solid var(--purple);
+            box-shadow: 0 0 40px rgba(123, 79, 255, 0.3);
+            margin-bottom: 20px;
+        }
+        .org-name { font-size: 14px; letter-spacing: 4px; color: var(--purple); text-transform: uppercase; font-weight: 700; }
+
+        /* Карточки создателей */
+        .creators-grid { display: flex; gap: 50px; flex-wrap: wrap; justify-content: center; }
+        
+        .card {
+            background: var(--card-bg); border: 1px solid #222; border-radius: 20px;
+            width: 350px; padding: 40px; text-align: center; position: relative;
+            transition: 0.4s; overflow: hidden;
+        }
+        .card:hover { transform: translateY(-10px); border-color: var(--accent); box-shadow: 0 10px 50px rgba(0,255,213, 0.1); }
+        
+        .card-avatar {
+            width: 100px; height: 100px; border-radius: 50%; object-fit: cover;
+            margin-bottom: 25px; border: 2px solid #333;
+        }
+        .card h2 { font-size: 24px; text-transform: uppercase; margin: 0 0 5px; }
+        .card .role { color: var(--accent); font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 20px; }
+        .card p { color: #888; font-size: 13px; font-style: italic; line-height: 1.6; margin-bottom: 30px; }
+        
+        .socials a {
+            display: inline-block; padding: 10px 25px; border: 1px solid #444;
+            color: #fff; text-decoration: none; font-size: 10px; font-weight: 700;
+            border-radius: 4px; transition: 0.3s; margin: 0 5px;
+        }
+        .socials a:hover { background: var(--accent); color: #000; border-color: var(--accent); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">Vinyl<span>.Auto</span></a>
+        <nav>
+            <a href="index.html">Главная</a>
+            <a href="creators.html" style="color: #fff;">Команда</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- Блок Организации -->
+        <div class="org-section">
+            <!-- org.jpg -->
+            <img src="org.jpg" alt="Organization" class="org-img" onerror="this.src='https://placehold.co/150/111/purple?text=ORG'">
+            <div class="org-name">Future Vision Group</div>
+        </div>
+
+        <!-- Карточки -->
+        <div class="creators-grid">
+            <!-- Creator 1 -->
+            <div class="card">
+                <img src="avatar.jpg" alt="CharontoTokyo" class="card-avatar">
+                <h2>Charonto<br>Tokyo</h2>
+                <div class="role">Lead Architect</div>
+                <p>"Я не просто пишу код, я создаю миры. Стремление к идеальному балансу между хаосом и порядком."</p>
+                <div class="socials">
+                    <a href="#">GITHUB</a>
+                    <a href="#">TELEGRAM</a>
+                </div>
+            </div>
+
+            <!-- Creator 2 -->
+            <div class="card">
+                <img src="avatar2.jpg" alt="ORLEANTUM" class="card-avatar">
+                <h2>Orleantum</h2>
+                <div class="role">Core Developer</div>
+                <p>"Технологии должны быть незаметными, как магия. Мы делаем сложное простым и красивым."</p>
+                <div class="socials">
+                    <a href="#">GITHUB</a>
+                    <a href="#">TELEGRAM</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

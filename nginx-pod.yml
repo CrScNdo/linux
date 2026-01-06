@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-web-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-website
+  template:
+    metadata:
+      labels:
+        app: my-website
+    spec:
+      containers:
+      - name: nginx-container
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        # --- HTML ФАЙЛЫ ---
+        - name: html-volume
+          mountPath: /usr/share/nginx/html/index.html
+          subPath: index.html
+        - name: html-volume
+          mountPath: /usr/share/nginx/html/creators.html
+          subPath: creators.html
+        
+        # --- КАРТИНКИ ---
+        - name: img-volume
+          mountPath: /usr/share/nginx/html/screen.jpg
+          subPath: screen.jpg
+        - name: img-volume
+          mountPath: /usr/share/nginx/html/org.jpg
+          subPath: org.jpg
+        - name: img-volume
+          mountPath: /usr/share/nginx/html/avatar.jpg
+          subPath: avatar.jpg
+        - name: img-volume
+          mountPath: /usr/share/nginx/html/avatar2.jpg
+          subPath: avatar2.jpg
+
+      volumes:
+      - name: html-volume
+        configMap:
+          name: site-html
+      - name: img-volume
+        configMap:
+          name: site-imgs

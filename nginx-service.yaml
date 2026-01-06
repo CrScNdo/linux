@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+spec:
+  type: NodePort        # Открывает порт наружу (чтобы мы могли зайти из браузера)
+  selector:
+    app: my-website     # <--- САМОЕ ВАЖНОЕ: Ищет поды с этим лейблом
+  ports:
+    - port: 80          # Порт самого сервиса (внутри кластера)
+      targetPort: 80    # Порт на контейнере (куда пересылать)
+      nodePort: 30007   # Порт на твоем компьютере (через который зайдем)

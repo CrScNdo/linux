@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinyl.Auto | Future Sound</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* --- НАСТРОЙКИ СТИЛЕЙ --- */
+        :root {
+            --bg-color: #020202;       
+            --accent-color: #00ffd5;
+            --text-gray: #b0b0b0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-color);
+            color: #ffffff;
+            overflow-x: hidden;
+            position: relative;
+        }
+/* СТИЛИ ДЛЯ ТЕХНОЛОГИЙ */
+        .tech-stack {
+            margin-top: 80px;
+            width: 100%;
+            max-width: 1000px;
+        }
+        .tech-stack h2 {
+            font-size: 24px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+            color: #fff;
+            position: relative;
+            display: inline-block;
+        }
+        /* Декоративная линия под заголовком */
+        .tech-stack h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px; left: 50%; transform: translateX(-50%);
+            width: 40px; height: 2px; background: var(--accent-color);
+        }
+
+        .tech-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tech-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid #222;
+            padding: 30px 20px;
+            border-radius: 12px;
+            width: 200px;
+            transition: 0.3s;
+        }
+
+        .tech-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+
+        .tech-icon {
+            font-size: 18px;
+            font-weight: 900;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 15px;
+            box-shadow: 0 0 15px rgba(0, 255, 213, 0.2);
+        }
+
+        .tech-item h3 {
+            font-size: 14px;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .tech-item p {
+            font-size: 11px;
+            color: #888;
+            line-height: 1.4;
+        }
+
+        /* ФОНОВЫЕ ЭФФЕКТЫ */
+        .background-glow {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background: 
+                radial-gradient(circle at 10% 30%, rgba(0, 255, 213, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 90% 60%, rgba(0, 40, 50, 0.4) 0%, transparent 50%);
+        }
+
+        /* ШАПКА */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 50px;
+            width: 100%;
+            position: absolute; top: 0; z-index: 10;
+        }
+
+        .logo {
+            font-weight: 900; font-size: 20px; letter-spacing: 1px;
+            text-transform: uppercase; color: #fff; text-decoration: none;
+        }
+        .logo span { color: var(--accent-color); }
+
+        nav ul { display: flex; list-style: none; gap: 40px; }
+        
+        nav a {
+            text-decoration: none; color: var(--text-gray);
+            font-size: 11px; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 1px; transition: color 0.3s;
+        }
+        nav a:hover { color: #fff; }
+
+        /* ГЛАВНЫЙ ЭКРАН */
+        .hero {
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            min-height: 100vh;
+            padding: 100px 20px 40px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 56px; font-weight: 800; line-height: 1.1;
+            margin-bottom: 20px; max-width: 1000px; text-transform: uppercase;
+        }
+
+        h1 span {
+            color: transparent;
+            -webkit-text-stroke: 1px var(--accent-color);
+            display: block;
+        }
+
+        p.subtitle {
+            font-size: 14px; color: var(--text-gray);
+            max-width: 650px; line-height: 1.6; margin-bottom: 40px;
+        }
+
+        /* КАРТИНКА ПРОЕКТА */
+        .project-showcase {
+            margin-bottom: 40px;
+            position: relative;
+            max-width: 800px; width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            border: 1px solid #222;
+        }
+
+        .project-showcase img { width: 100%; height: auto; display: block; }
+
+        /* КНОПКА */
+        .btn-main {
+            background: transparent; color: #fff;
+            border: 1px solid var(--accent-color);
+            padding: 15px 40px; font-size: 11px; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase;
+            cursor: pointer; transition: all 0.3s ease;
+        }
+        .btn-main:hover {
+            background: var(--accent-color); color: #000;
+            box-shadow: 0 0 20px rgba(0, 255, 213, 0.4);
+        }
+
+        /* МОДАЛЬНОЕ ОКНО ДЛЯ ВИДЕО */
+        .modal {
+            display: none; /* Скрыто по умолчанию */
+            position: fixed; z-index: 100; left: 0; top: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.9); /* Темный фон */
+            backdrop-filter: blur(5px);
+        }
+        .modal-content {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%; max-width: 960px;
+            aspect-ratio: 16 / 9;
+            border: 1px solid #333;
+            box-shadow: 0 0 50px rgba(0,255,213, 0.2);
+        }
+        .close-btn {
+            position: absolute; top: 20px; right: 40px;
+            color: #fff; font-size: 40px; font-weight: bold; cursor: pointer;
+            transition: 0.3s;
+        }
+        .close-btn:hover { color: var(--accent-color); }
+
+	<!-- БЛОК ТЕХНОЛОГИЙ -->
+        <div class="tech-stack">
+            <h2>Under the Hood</h2>
+            <div class="tech-grid">
+                <!-- Технология 1 -->
+                <div class="tech-item">
+                    <div class="tech-icon">C++</div>
+                    <h3>Core Logic</h3>
+                    <p>Высокая производительность и работа с памятью.</p>
+                </div>
+                <!-- Технология 2 -->
+                <div class="tech-item">
+                    <div class="tech-icon">Qt</div>
+                    <h3>Interface</h3>
+                    <p>Кроссплатформенный GUI и система сигналов/слотов.</p>
+                </div>
+                <!-- Технология 3 -->
+                <div class="tech-item">
+                    <div class="tech-icon">AI</div>
+                    <h3>LibTorch</h3>
+                    <p>Нейросети для анализа аудио и авто-тегирования.</p>
+                </div>
+                <!-- Технология 4 -->
+                <div class="tech-item">
+                    <div class="tech-icon">DB</div>
+                    <h3>SQLite</h3>
+                    <p>Локальное хранение метаданных и плейлистов.</p>
+                </div>
+            </div>
+        </div>
+
+
+        /* ПОДВАЛ */
+        .stats {
+            display: flex; gap: 60px; margin-top: 50px;
+            border-top: 1px solid #1a1a1a; padding-top: 30px;
+        }
+        .stat-item h3 { font-size: 20px; color: #fff; margin-bottom: 5px; }
+        .stat-item p { font-size: 9px; color: var(--text-gray); text-transform: uppercase; letter-spacing: 1px; }
+
+    </style>
+</head>
+<body>
+
+    <div class="background-glow"></div>
+
+    <header>
+        <a href="index.html" class="logo">Vinyl<span>.Auto</span></a>
+        <nav>
+            <ul>
+                <li><a href="index.html" style="color: #fff;">О проекте</a></li>
+                <li><a href="creators.html">Команда</a></li>
+                <!-- Ссылка на GitHub -->
+                <li><a href="https://github.com/ff33e7/MUSIC" target="_blank">GitHub</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="hero">
+        
+        <h1>Автоматизация <span>Подбора музыки</span></h1>
+        
+        <p class="subtitle">
+            Интерактивная система управления виниловым проигрывателем. 
+            Точная настройка RPM, визуализация треков и цифровая интеграция с аналоговым звуком.
+        </p>
+
+        <div class="project-showcase">
+            <img src="screen.jpg" alt="Интерфейс винилового проигрывателя">
+        </div>
+
+        <!-- Кнопка теперь открывает модальное окно -->
+        <button class="btn-main" onclick="openModal()">
+            Запустить Демо
+        </button>
+
+        <div class="stats">
+            <div class="stat-item"><h3>33 / 45</h3><p>RPM Control</p></div>
+            <div class="stat-item"><h3>Hi-Res</h3><p>Audio Engine</p></div>
+            <div class="stat-item"><h3>Real-time</h3><p>Synchronization</p></div>
+        </div>
+
+    </main>
+
+    <!-- МОДАЛЬНОЕ ОКНО С ВИДЕО -->
+    <div id="videoModal" class="modal" onclick="closeModal()">
+        <span class="close-btn">&times;</span>
+        <div class="modal-content">
+            <!-- Iframe изначально пустой, чтобы видео не грузилось зря -->
+            <iframe id="rutubeFrame" width="100%" height="100%" frameBorder="0" allow="clipboard-write; autoplay" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+        </div>
+    </div>
+
+    <script>
+        // Ссылка на ваше видео Rutube (embed формат)
+        const videoUrl = "https://rutube.ru/play/embed/0f9b7b40421c1cfda406c897685e699e";
+
+        function openModal() {
+            const modal = document.getElementById('videoModal');
+            const frame = document.getElementById('rutubeFrame');
+            // Вставляем ссылку, чтобы видео начало грузиться
+            frame.src = videoUrl;
+            modal.style.display = "block";
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('videoModal');
+            const frame = document.getElementById('rutubeFrame');
+            // Очищаем ссылку, чтобы видео перестало играть при закрытии
+            frame.src = "";
+            modal.style.display = "none";
+        }
+    </script>
+
+</body>
+</html>
