@@ -18,7 +18,7 @@ spec:
         ports:
         - containerPort: 80
         volumeMounts:
-        # --- HTML ФАЙЛЫ ---
+        # --- HTML ---
         - name: html-volume
           mountPath: /usr/share/nginx/html/index.html
           subPath: index.html
@@ -39,6 +39,11 @@ spec:
         - name: img-volume
           mountPath: /usr/share/nginx/html/avatar2.jpg
           subPath: avatar2.jpg
+        
+        # --- ФАВИКОНКА (НОВОЕ) ---
+        - name: img-volume
+          mountPath: /usr/share/nginx/html/vinyl.jpg
+          subPath: vinyl.jpg
 
       volumes:
       - name: html-volume
