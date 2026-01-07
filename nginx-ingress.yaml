@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: web-ingress
+spec:
+  rules:
+  - host: vinyl-auto.local  # Придуманный нами домен
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: my-web-deployment # Имя твоего Сервиса (проверь через kubectl get svc)
+            port:
+              number: 80

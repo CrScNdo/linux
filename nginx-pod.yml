@@ -17,6 +17,15 @@ spec:
         image: nginx:alpine
         ports:
         - containerPort: 80
+        
+        # --- ИСПРАВЛЕННАЯ СЕКЦИЯ ENV (Следи за отступами!) ---
+        env:
+        - name: MY_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: api-prod-secret
+              key: API_KEY
+
         volumeMounts:
         # --- HTML ---
         - name: html-volume
@@ -39,12 +48,11 @@ spec:
         - name: img-volume
           mountPath: /usr/share/nginx/html/avatar2.jpg
           subPath: avatar2.jpg
-
-        # --- ФАВИКОНКА (НОВОЕ) ---
         - name: img-volume
           mountPath: /usr/share/nginx/html/vinyl.jpg
           subPath: vinyl.jpg
 
+      # --- ВЕРНУЛИ СЕКЦИЮ VOLUMES (Без неё не заработает) ---
       volumes:
       - name: html-volume
         configMap:
